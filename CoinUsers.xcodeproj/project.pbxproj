@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,13 @@
 		16E809E6264963A700DAD562 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16E809E4264963A700DAD562 /* LaunchScreen.storyboard */; };
 		16E809F1264963A700DAD562 /* CoinUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E809F0264963A700DAD562 /* CoinUsersTests.swift */; };
 		16E809FC264963A700DAD562 /* CoinUsersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E809FB264963A700DAD562 /* CoinUsersUITests.swift */; };
+		16E80A0B2649640900DAD562 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A0A2649640900DAD562 /* RxSwift */; };
+		16E80A0D2649640900DAD562 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A0C2649640900DAD562 /* RxCocoa */; };
+		16E80A0F2649640900DAD562 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A0E2649640900DAD562 /* RxRelay */; };
+		16E80A122649649000DAD562 /* RxFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A112649649000DAD562 /* RxFlow */; };
+		16E80A15264964B200DAD562 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A14264964B200DAD562 /* Swinject */; };
+		16E80A182649650800DAD562 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A172649650800DAD562 /* RxAlamofire */; };
+		16E80A1B2649655D00DAD562 /* RxKingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A1A2649655D00DAD562 /* RxKingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E80A1B2649655D00DAD562 /* RxKingfisher in Frameworks */,
+				16E80A122649649000DAD562 /* RxFlow in Frameworks */,
+				16E80A15264964B200DAD562 /* Swinject in Frameworks */,
+				16E80A0F2649640900DAD562 /* RxRelay in Frameworks */,
+				16E80A182649650800DAD562 /* RxAlamofire in Frameworks */,
+				16E80A0D2649640900DAD562 /* RxCocoa in Frameworks */,
+				16E80A0B2649640900DAD562 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +158,15 @@
 			dependencies = (
 			);
 			name = CoinUsers;
+			packageProductDependencies = (
+				16E80A0A2649640900DAD562 /* RxSwift */,
+				16E80A0C2649640900DAD562 /* RxCocoa */,
+				16E80A0E2649640900DAD562 /* RxRelay */,
+				16E80A112649649000DAD562 /* RxFlow */,
+				16E80A14264964B200DAD562 /* Swinject */,
+				16E80A172649650800DAD562 /* RxAlamofire */,
+				16E80A1A2649655D00DAD562 /* RxKingfisher */,
+			);
 			productName = CoinUsers;
 			productReference = 16E809D6264963A400DAD562 /* CoinUsers.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +238,13 @@
 				Base,
 			);
 			mainGroup = 16E809CD264963A400DAD562;
+			packageReferences = (
+				16E80A092649640900DAD562 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				16E80A102649649000DAD562 /* XCRemoteSwiftPackageReference "RxFlow" */,
+				16E80A13264964B200DAD562 /* XCRemoteSwiftPackageReference "Swinject" */,
+				16E80A162649650800DAD562 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+				16E80A192649655D00DAD562 /* XCRemoteSwiftPackageReference "RxKingfisher" */,
+			);
 			productRefGroup = 16E809D7264963A400DAD562 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -593,6 +623,87 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		16E80A092649640900DAD562 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.2.0;
+			};
+		};
+		16E80A102649649000DAD562 /* XCRemoteSwiftPackageReference "RxFlow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxFlow";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.12.1;
+			};
+		};
+		16E80A13264964B200DAD562 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
+		16E80A162649650800DAD562 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.1.1;
+			};
+		};
+		16E80A192649655D00DAD562 /* XCRemoteSwiftPackageReference "RxKingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKingfisher";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		16E80A0A2649640900DAD562 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A092649640900DAD562 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		16E80A0C2649640900DAD562 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A092649640900DAD562 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		16E80A0E2649640900DAD562 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A092649640900DAD562 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		16E80A112649649000DAD562 /* RxFlow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A102649649000DAD562 /* XCRemoteSwiftPackageReference "RxFlow" */;
+			productName = RxFlow;
+		};
+		16E80A14264964B200DAD562 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A13264964B200DAD562 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		16E80A172649650800DAD562 /* RxAlamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A162649650800DAD562 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
+		16E80A1A2649655D00DAD562 /* RxKingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A192649655D00DAD562 /* XCRemoteSwiftPackageReference "RxKingfisher" */;
+			productName = RxKingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 16E809CE264963A400DAD562 /* Project object */;
 }
