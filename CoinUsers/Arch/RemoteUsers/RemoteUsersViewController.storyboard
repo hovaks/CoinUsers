@@ -16,24 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RemoteUsers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqq-BU-mlF">
-                                <rect key="frame" x="155.5" y="442.5" width="103" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="woA-Hk-3by">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Iqq-BU-mlF" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="c22-Tt-RCg"/>
-                            <constraint firstItem="Iqq-BU-mlF" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="vZl-Nf-ahT"/>
+                            <constraint firstItem="woA-Hk-3by" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="1qm-mA-FW4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="woA-Hk-3by" secondAttribute="bottom" id="2j2-vY-FDX"/>
+                            <constraint firstItem="woA-Hk-3by" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dfI-Xc-m07"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="woA-Hk-3by" secondAttribute="trailing" id="sCE-gb-v8R"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="woA-Hk-3by" id="MbT-O1-w2E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="124"/>
+            <point key="canvasLocation" x="137.68115942028987" y="123.88392857142857"/>
         </scene>
     </scenes>
     <resources>

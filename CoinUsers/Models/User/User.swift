@@ -13,8 +13,14 @@ protocol User {
 	var title: String { get }
 	var firstName: String { get }
 	var lastName: String { get }
+	var genderSign: String { get }
 	var age: Int { get }
 	var email: String { get }
 	var phone: String { get }
 	var address: Address { get }
+}
+
+extension User {
+	var fullName: String { firstName + " " + lastName }
+	var cellAddress: String { address.country + ", " + address.state + ", " + address.city }
 }

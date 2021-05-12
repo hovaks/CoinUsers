@@ -55,6 +55,10 @@
 		16E80A71264AF24F00DAD562 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A70264AF24F00DAD562 /* Alamofire */; };
 		16E80A73264B250400DAD562 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E80A72264B250400DAD562 /* JSONDecoder+Extensions.swift */; };
 		16E80A75264B277900DAD562 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E80A74264B277900DAD562 /* Endpoints.swift */; };
+		16E80A7D264B309100DAD562 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E80A7B264B309100DAD562 /* UserTableViewCell.swift */; };
+		16E80A7E264B309100DAD562 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16E80A7C264B309100DAD562 /* UserTableViewCell.xib */; };
+		16E80A81264BE95A00DAD562 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A80264BE95A00DAD562 /* RxGesture */; };
+		16E80A83264BEF7C00DAD562 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E80A82264BEF7C00DAD562 /* UIScrollView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +124,9 @@
 		16E80A6D264AECA400DAD562 /* RemoteUsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUsersResponse.swift; sourceTree = "<group>"; };
 		16E80A72264B250400DAD562 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
 		16E80A74264B277900DAD562 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		16E80A7B264B309100DAD562 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		16E80A7C264B309100DAD562 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		16E80A82264BEF7C00DAD562 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +136,7 @@
 			files = (
 				16E80A71264AF24F00DAD562 /* Alamofire in Frameworks */,
 				16E80A1B2649655D00DAD562 /* RxKingfisher in Frameworks */,
+				16E80A81264BE95A00DAD562 /* RxGesture in Frameworks */,
 				16E80A122649649000DAD562 /* RxFlow in Frameworks */,
 				16E80A15264964B200DAD562 /* Swinject in Frameworks */,
 				16E80A2A26497B7300DAD562 /* SwinjectAutoregistration in Frameworks */,
@@ -180,11 +188,12 @@
 			isa = PBXGroup;
 			children = (
 				16E80A3526497C1500DAD562 /* Base */,
+				16E80A51264ACB0700DAD562 /* Extensions */,
 				16E80A2526497AF800DAD562 /* DI */,
 				16E80A1C264967C900DAD562 /* Coordinator */,
-				16E80A51264ACB0700DAD562 /* Extensions */,
-				16E80A5A264AD8BC00DAD562 /* Models */,
 				16E80A5D264AE56C00DAD562 /* Services */,
+				16E80A5A264AD8BC00DAD562 /* Models */,
+				16E80A76264B2AC400DAD562 /* Views */,
 				16E80A2B26497BA100DAD562 /* Arch */,
 				16E809D9264963A400DAD562 /* AppDelegate.swift */,
 				16E809DB264963A400DAD562 /* SceneDelegate.swift */,
@@ -292,6 +301,7 @@
 			children = (
 				16E80A52264ACB1700DAD562 /* UIColor+Extensions.swift */,
 				16E80A72264B250400DAD562 /* JSONDecoder+Extensions.swift */,
+				16E80A82264BEF7C00DAD562 /* UIScrollView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -335,6 +345,15 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		16E80A76264B2AC400DAD562 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				16E80A7B264B309100DAD562 /* UserTableViewCell.swift */,
+				16E80A7C264B309100DAD562 /* UserTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -361,6 +380,7 @@
 				16E80A2926497B7300DAD562 /* SwinjectAutoregistration */,
 				16E80A4726497E5100DAD562 /* Reusable */,
 				16E80A70264AF24F00DAD562 /* Alamofire */,
+				16E80A80264BE95A00DAD562 /* RxGesture */,
 			);
 			productName = CoinUsers;
 			productReference = 16E809D6264963A400DAD562 /* CoinUsers.app */;
@@ -441,6 +461,7 @@
 				16E80A2826497B7300DAD562 /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */,
 				16E80A4626497E5100DAD562 /* XCRemoteSwiftPackageReference "Reusable" */,
 				16E80A6F264AF24F00DAD562 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				16E80A7F264BE95A00DAD562 /* XCRemoteSwiftPackageReference "RxGesture" */,
 			);
 			productRefGroup = 16E809D7264963A400DAD562 /* Products */;
 			projectDirPath = "";
@@ -461,6 +482,7 @@
 				16E809E6264963A700DAD562 /* LaunchScreen.storyboard in Resources */,
 				16E809E3264963A700DAD562 /* Assets.xcassets in Resources */,
 				16E80A3F26497D7B00DAD562 /* RemoteUsersViewController.storyboard in Resources */,
+				16E80A7E264B309100DAD562 /* UserTableViewCell.xib in Resources */,
 				16E80A3426497BF800DAD562 /* LocalUsersViewController.storyboard in Resources */,
 				16E80A4526497D9700DAD562 /* SettingsViewController.storyboard in Resources */,
 				16E80A55264ACB7600DAD562 /* Colors.xcassets in Resources */,
@@ -503,11 +525,13 @@
 				16E80A57264AD0E100DAD562 /* SettingsAssembly.swift in Sources */,
 				16E80A5C264AD8CB00DAD562 /* MainTab.swift in Sources */,
 				16E80A3026497BE200DAD562 /* LocalUsersViewController.swift in Sources */,
+				16E80A83264BEF7C00DAD562 /* UIScrollView+Extensions.swift in Sources */,
 				16E80A53264ACB1700DAD562 /* UIColor+Extensions.swift in Sources */,
 				16E80A3B26497D3600DAD562 /* RemoteUsersViewController.swift in Sources */,
 				16E80A73264B250400DAD562 /* JSONDecoder+Extensions.swift in Sources */,
 				16E80A2026496A7A00DAD562 /* RemoteUsersFlow.swift in Sources */,
 				16E809DA264963A400DAD562 /* AppDelegate.swift in Sources */,
+				16E80A7D264B309100DAD562 /* UserTableViewCell.swift in Sources */,
 				16E809DC264963A400DAD562 /* SceneDelegate.swift in Sources */,
 				16E80A66264AE9AD00DAD562 /* RemoteUser.swift in Sources */,
 				16E80A4A264980AF00DAD562 /* ServiceAssembly.swift in Sources */,
@@ -901,6 +925,14 @@
 				minimumVersion = 5.4.3;
 			};
 		};
+		16E80A7F264BE95A00DAD562 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -948,6 +980,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 16E80A6F264AF24F00DAD562 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		16E80A80264BE95A00DAD562 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16E80A7F264BE95A00DAD562 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
