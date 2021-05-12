@@ -16,7 +16,7 @@ import SwinjectAutoregistration
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	let disposeBag = DisposeBag()
 	let coordinator = FlowCoordinator()
-	private var parentAssembler = Assembler([FlowAssembly()])
+	private var parentAssembler = Assembler([FlowAssembly(), ServiceAssembly()])
 	var window: UIWindow?
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
