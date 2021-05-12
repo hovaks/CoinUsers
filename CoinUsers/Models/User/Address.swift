@@ -13,6 +13,6 @@ protocol Address {
 	var city: String { get }
 	var streetName: String { get }
 	var streetNumber: String { get }
-	var latitude: String { get }
-	var longitude: String { get }
+	var latitude: Double { get }
+	var longitude: Double { get }
 }

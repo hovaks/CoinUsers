@@ -9,6 +9,7 @@ import Swinject
 import SwinjectAutoregistration
 
 import Alamofire
+import RealmSwift
 
 final class ServiceAssembly: Assembly {
 	func assemble(container: Container) {
@@ -30,5 +31,14 @@ final class ServiceAssembly: Assembly {
 			let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(keyEncoding: .convertToSnakeCase))
 			return RemoteUsersService(session: session, encoder: encoder)
 		}
+
+		// MARK: - Realm
+
+		container.register(Realm.self) { _ in
+			do { return try Realm() }
+			catch { fatalError() }
+		}.inObjectScope(.container)
+
+		container.autoregister(RealmServiceProtocol.self, initializer: RealmService.init)
 	}
 }

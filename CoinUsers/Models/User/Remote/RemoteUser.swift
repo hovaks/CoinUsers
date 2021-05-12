@@ -60,7 +60,7 @@ extension RemoteUser: User {
 	}
 
 	var id: String { login.uuid }
-	var avatar: URL { picture.large }
+	var avatar: URL? { picture.large }
 	var title: String { name.title }
 	var firstName: String { name.first }
 	var lastName: String { name.last }

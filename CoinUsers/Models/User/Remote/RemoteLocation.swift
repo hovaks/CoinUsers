@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - RemoteLocation
+
 struct RemoteLocation: Decodable, Hashable {
 	// MARK: Street
 
@@ -28,9 +30,17 @@ struct RemoteLocation: Decodable, Hashable {
 	let coordinates: Coordinates
 }
 
+// MARK: Address
+
 extension RemoteLocation: Address {
 	var streetName: String { street.name }
 	var streetNumber: String { String(street.number) }
-	var latitude: String { coordinates.latitude }
-	var longitude: String { coordinates.longitude }
+	var latitude: Double {
+		guard let latitude = Double(coordinates.latitude) else { fatalError() }
+		return latitude
+	}
+	var longitude: Double {
+		guard let longitude = Double(coordinates.longitude) else { fatalError() }
+		return longitude
+	}
 }

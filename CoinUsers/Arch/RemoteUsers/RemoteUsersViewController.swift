@@ -67,19 +67,15 @@ final class RemoteUsersViewController: BaseViewController {
 
 		// MARK: - TableView
 
-		Observable.combineLatest(viewModel.users, viewModel.search) { users, search in
-			zip(users, [String](repeating: search, count: users.count))
-		}
-		.bind(to: tableView.rx.items) { [viewModel] tv, row, tuple in
-			let indexPath = IndexPath(row: row, section: 0)
-			let cell: UserTableViewCell = tv.dequeueReusableCell(for: indexPath)
-			let (user, search) = tuple
-			cell.user = user
-			cell.delegate = viewModel
-			cell.search = search
-			return cell
-		}
-		.disposed(by: disposeBag)
+		viewModel.users
+			.bind(to: tableView.rx.items) { [viewModel] tv, row, model in
+				let indexPath = IndexPath(row: row, section: 0)
+				let cell: UserTableViewCell = tv.dequeueReusableCell(for: indexPath)
+				cell.model = model
+				cell.delegate = viewModel
+				return cell
+			}
+			.disposed(by: disposeBag)
 
 		tableView.rx.contentOffset
 			.flatMap { [weak self] _ -> Observable<Void> in

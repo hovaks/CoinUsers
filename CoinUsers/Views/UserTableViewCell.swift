@@ -15,12 +15,20 @@ import RxSwift
 // MARK: - UserCellDelegate
 
 protocol UserCellDelegate: AnyObject {
-	func didTapSaveButton(user: User)
+	func didTapActionButton(for model: UserTableViewCell.Model)
 }
 
 // MARK: - UserTableViewCell
 
 final class UserTableViewCell: UITableViewCell, NibReusable {
+	// MARK: - UserCellModel
+
+	struct Model {
+		let user: User
+		let isSaved: Bool
+		let search: String
+	}
+
 	// MARK: - Delegate
 
 	weak var delegate: UserCellDelegate?
@@ -36,7 +44,7 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 	@IBOutlet private var phoneLabel: UILabel!
 	@IBOutlet private var addressLabel: UILabel!
 	@IBOutlet private var genderImageView: UIImageView!
-	@IBOutlet private var heartImageView: UIImageView!
+	@IBOutlet private var actionImageView: UIImageView!
 
 	// MARK: - Reuse
 
@@ -50,17 +58,21 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 
 	// MARK: - User
 
-	var user: User! {
-		didSet { configure(with: user) }
+	var model: Model! {
+		didSet { configure(with: model) }
 	}
 
-	private func configure(with user: User) {
+	private func configure(with model: Model) {
+		let user = model.user
 		avatarImageView.kf.setImage(with: user.avatar, placeholder: UIImage(systemName: "person.crop.circle"))
 		nameLabel.text = user.fullName
 		genderImageView.image = UIImage(named: user.genderSign)
 		emailLabel.text = user.email
 		phoneLabel.text = user.phone
 		addressLabel.text = user.addressText
+		actionImageView.image = model.isSaved ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+
+		highlightSearch(for: model.search)
 
 		doBindings()
 	}
@@ -69,23 +81,19 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 
 	private lazy var searchLabels = [nameLabel, emailLabel, phoneLabel, addressLabel]
 
-	var search: String? { didSet { highlightSearch() } }
-
-	private func highlightSearch() {
+	private func highlightSearch(for query: String) {
 		searchLabels.forEach {
 			guard let text = $0?.text else { return }
 			$0?.attributedText = NSAttributedString(string: text)
 		}
 
-		let search = self.search ?? ""
-
 		guard
-			let labelToHighlight = searchLabels.first(where: { $0?.text?.contains(search) ?? false }),
+			let labelToHighlight = searchLabels.first(where: { $0?.text?.contains(query) ?? false }),
 			let labelText = labelToHighlight?.text
 		else { return }
 
 		let attributedString = NSMutableAttributedString(string: labelText)
-		let searchRange = (labelText.lowercased() as NSString).range(of: search.lowercased(), options: [.numeric])
+		let searchRange = (labelText.lowercased() as NSString).range(of: query.lowercased(), options: [.numeric])
 		let highlightColor = UIColor.systemYellow.withAlphaComponent(0.5)
 		attributedString.addAttribute(.backgroundColor, value: highlightColor, range: searchRange)
 		labelToHighlight?.attributedText = attributedString
@@ -96,10 +104,10 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 	private var disposeBag = DisposeBag()
 
 	private func doBindings() {
-		heartImageView.rx.tapGesture().when(.recognized)
+		actionImageView.rx.tapGesture().when(.recognized)
 			.subscribe(onNext: { [weak self] _ in
 				guard let self = self else { return }
-				self.delegate?.didTapSaveButton(user: self.user)
+				self.delegate?.didTapActionButton(for: self.model)
 			})
 			.disposed(by: disposeBag)
 	}

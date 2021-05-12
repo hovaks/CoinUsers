@@ -59,6 +59,10 @@
 		16E80A7E264B309100DAD562 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16E80A7C264B309100DAD562 /* UserTableViewCell.xib */; };
 		16E80A81264BE95A00DAD562 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 16E80A80264BE95A00DAD562 /* RxGesture */; };
 		16E80A83264BEF7C00DAD562 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E80A82264BEF7C00DAD562 /* UIScrollView+Extensions.swift */; };
+		16FC0C6A264C1AB1009EF8CF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 16FC0C69264C1AB1009EF8CF /* Realm */; };
+		16FC0C6C264C1AB1009EF8CF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16FC0C6B264C1AB1009EF8CF /* RealmSwift */; };
+		16FC0C6E264C2065009EF8CF /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FC0C6D264C2065009EF8CF /* RealmService.swift */; };
+		16FC0C71264C280C009EF8CF /* LocalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FC0C70264C280C009EF8CF /* LocalUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +131,8 @@
 		16E80A7B264B309100DAD562 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		16E80A7C264B309100DAD562 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		16E80A82264BEF7C00DAD562 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		16FC0C6D264C2065009EF8CF /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		16FC0C70264C280C009EF8CF /* LocalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FC0C6C264C1AB1009EF8CF /* RealmSwift in Frameworks */,
+				16FC0C6A264C1AB1009EF8CF /* Realm in Frameworks */,
 				16E80A71264AF24F00DAD562 /* Alamofire in Frameworks */,
 				16E80A1B2649655D00DAD562 /* RxKingfisher in Frameworks */,
 				16E80A81264BE95A00DAD562 /* RxGesture in Frameworks */,
@@ -320,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				16E80A5E264AE58900DAD562 /* RemoteUsersService.swift */,
+				16FC0C6D264C2065009EF8CF /* RealmService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -327,6 +336,7 @@
 		16E80A60264AE5B200DAD562 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				16FC0C6F264C27F6009EF8CF /* Local */,
 				16E80A68264AE9FB00DAD562 /* Remote */,
 				16E80A61264AE5FA00DAD562 /* User.swift */,
 				16E80A63264AE6E800DAD562 /* Address.swift */,
@@ -352,6 +362,14 @@
 				16E80A7C264B309100DAD562 /* UserTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		16FC0C6F264C27F6009EF8CF /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				16FC0C70264C280C009EF8CF /* LocalUser.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +399,8 @@
 				16E80A4726497E5100DAD562 /* Reusable */,
 				16E80A70264AF24F00DAD562 /* Alamofire */,
 				16E80A80264BE95A00DAD562 /* RxGesture */,
+				16FC0C69264C1AB1009EF8CF /* Realm */,
+				16FC0C6B264C1AB1009EF8CF /* RealmSwift */,
 			);
 			productName = CoinUsers;
 			productReference = 16E809D6264963A400DAD562 /* CoinUsers.app */;
@@ -462,6 +482,7 @@
 				16E80A4626497E5100DAD562 /* XCRemoteSwiftPackageReference "Reusable" */,
 				16E80A6F264AF24F00DAD562 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				16E80A7F264BE95A00DAD562 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				16FC0C68264C1AB1009EF8CF /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 16E809D7264963A400DAD562 /* Products */;
 			projectDirPath = "";
@@ -511,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16E80A75264B277900DAD562 /* Endpoints.swift in Sources */,
+				16FC0C6E264C2065009EF8CF /* RealmService.swift in Sources */,
 				16E80A2726497B2D00DAD562 /* UsersAssembly.swift in Sources */,
 				16E80A3226497BED00DAD562 /* LocalUsersViewModel.swift in Sources */,
 				16E80A3726497C2200DAD562 /* BaseViewController.swift in Sources */,
@@ -520,6 +542,7 @@
 				16E80A3926497CDF00DAD562 /* BaseViewModel.swift in Sources */,
 				16E80A4C264980E100DAD562 /* FlowAssembly.swift in Sources */,
 				16E80A1E264967E300DAD562 /* AppFlow.swift in Sources */,
+				16FC0C71264C280C009EF8CF /* LocalUser.swift in Sources */,
 				16E80A4126497D8900DAD562 /* SettingsViewController.swift in Sources */,
 				16E80A64264AE6E800DAD562 /* Address.swift in Sources */,
 				16E80A57264AD0E100DAD562 /* SettingsAssembly.swift in Sources */,
@@ -933,6 +956,14 @@
 				minimumVersion = 4.0.2;
 			};
 		};
+		16FC0C68264C1AB1009EF8CF /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 10.7.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -985,6 +1016,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 16E80A7F264BE95A00DAD562 /* XCRemoteSwiftPackageReference "RxGesture" */;
 			productName = RxGesture;
+		};
+		16FC0C69264C1AB1009EF8CF /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16FC0C68264C1AB1009EF8CF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		16FC0C6B264C1AB1009EF8CF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16FC0C68264C1AB1009EF8CF /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
