@@ -16,8 +16,6 @@ final class RemoteUsersViewModel: BaseViewModel {
 	let refresh = PublishRelay<Void>()
 	let loadMore = PublishRelay<Void>()
 	let search = BehaviorRelay(value: "")
-	let save = PublishRelay<User>()
-	let delete = PublishRelay<User>()
 
 	// MARK: - Outputs
 
@@ -34,6 +32,10 @@ final class RemoteUsersViewModel: BaseViewModel {
 	private let allUsers = BehaviorRelay(value: [User]())
 	private let filteredUsers = PublishRelay<[User]>()
 	private let localUsers = PublishRelay<[User]>()
+	private let save = PublishRelay<User>()
+	private let delete = PublishRelay<User>()
+
+	// MARK: - Init
 
 	init(usersService: RemoteUsersServiceProtocol, realmService: RealmServiceProtocol) {
 		self.usersService = usersService
@@ -46,8 +48,14 @@ final class RemoteUsersViewModel: BaseViewModel {
 	// MARK: - Reactive
 
 	private func doBindings() {
-		// MARK: - API
+		bindAPI()
+		bindRealm()
+		bindUsers()
+	}
 
+	// MARK: API
+
+	private func bindAPI() {
 		let resultsPerPage = 50
 		Observable.merge(refresh.asObservable(), loadMore.asObservable())
 			.withLatestFrom(isLoading).filter { !$0 }
@@ -63,7 +71,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 			.bind(to: allUsers)
 			.disposed(by: disposeBag)
 
-		// MARK: - Search
+		// Search
 
 		search
 			.withLatestFrom(allUsers) { query, users in
@@ -71,9 +79,11 @@ final class RemoteUsersViewModel: BaseViewModel {
 			}
 			.bind(to: filteredUsers)
 			.disposed(by: disposeBag)
+	}
 
-		// MARK: - Users
+	// MARK: Users
 
+	private func bindUsers() {
 		Observable.combineLatest(
 			allUsers,
 			filteredUsers,
@@ -91,9 +101,9 @@ final class RemoteUsersViewModel: BaseViewModel {
 		}
 		.bind(to: users)
 		.disposed(by: disposeBag)
-
-		bindRealm()
 	}
+
+	// MARK: Realm
 
 	private func bindRealm() {
 		refresh
@@ -103,6 +113,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 			.bind(to: localUsers)
 			.disposed(by: disposeBag)
 
+		// Save
 		save
 			.flatMap { [realmService] user in
 				realmService.save(user: user)
@@ -113,6 +124,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 			.bind(to: localUsers)
 			.disposed(by: disposeBag)
 
+		// Delete
 		delete
 			.flatMap { [realmService] user in
 				realmService.delete(user: user)

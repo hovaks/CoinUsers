@@ -59,14 +59,12 @@ final class RemoteUsersViewController: BaseViewController {
 	// MARK: - Reactive
 
 	private func doBindings() {
-		// MARK: - SearchBar
-
+		// SearchBar
 		navigationItem.searchController?.searchBar.rx.text.orEmpty
 			.bind(to: viewModel.search)
 			.disposed(by: disposeBag)
 
-		// MARK: - TableView
-
+		// TableView
 		viewModel.users
 			.bind(to: tableView.rx.items) { [viewModel] tv, row, model in
 				let indexPath = IndexPath(row: row, section: 0)
@@ -77,6 +75,7 @@ final class RemoteUsersViewController: BaseViewController {
 			}
 			.disposed(by: disposeBag)
 
+		// LoadMore
 		tableView.rx.contentOffset
 			.flatMap { [weak self] _ -> Observable<Void> in
 				guard let self = self else { return .empty() }
@@ -85,8 +84,7 @@ final class RemoteUsersViewController: BaseViewController {
 			.bind(to: viewModel.loadMore)
 			.disposed(by: disposeBag)
 
-		// MARK: - Error
-
+		// Error
 		viewModel.error.bind(to: error).disposed(by: disposeBag)
 	}
 }
