@@ -22,5 +22,6 @@ protocol User {
 
 extension User {
 	var fullName: String { firstName + " " + lastName }
-	var cellAddress: String { address.country + ", " + address.state + ", " + address.city }
+	var addressText: String { address.country + ", " + address.state + ", " + address.city }
+	var searchFields: [String] { [fullName, email, phone, addressText] }
 }

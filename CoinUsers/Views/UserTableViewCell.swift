@@ -42,10 +42,13 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 
 	override func prepareForReuse() {
 		super.prepareForReuse()
+
+		avatarImageView.kf.cancelDownloadTask()
+		avatarImageView.image = nil
 		disposeBag = DisposeBag()
 	}
 
-	// MARK: - Injection
+	// MARK: - User
 
 	var user: User! {
 		didSet { configure(with: user) }
@@ -57,9 +60,35 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 		genderImageView.image = UIImage(named: user.genderSign)
 		emailLabel.text = user.email
 		phoneLabel.text = user.phone
-		addressLabel.text = user.cellAddress
+		addressLabel.text = user.addressText
 
 		doBindings()
+	}
+
+	// MARK: - Search
+
+	private lazy var searchLabels = [nameLabel, emailLabel, phoneLabel, addressLabel]
+
+	var search: String? { didSet { highlightSearch() } }
+
+	private func highlightSearch() {
+		searchLabels.forEach {
+			guard let text = $0?.text else { return }
+			$0?.attributedText = NSAttributedString(string: text)
+		}
+
+		let search = self.search ?? ""
+
+		guard
+			let labelToHighlight = searchLabels.first(where: { $0?.text?.contains(search) ?? false }),
+			let labelText = labelToHighlight?.text
+		else { return }
+
+		let attributedString = NSMutableAttributedString(string: labelText)
+		let searchRange = (labelText.lowercased() as NSString).range(of: search.lowercased(), options: [.numeric])
+		let highlightColor = UIColor.systemYellow.withAlphaComponent(0.5)
+		attributedString.addAttribute(.backgroundColor, value: highlightColor, range: searchRange)
+		labelToHighlight?.attributedText = attributedString
 	}
 
 	// MARK: - Reactive
