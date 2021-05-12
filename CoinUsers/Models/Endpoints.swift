@@ -8,5 +8,5 @@
 import Foundation
 
 enum Endpoints {
-	static let users = URL(string: "https://randomUser.me/api?")!
+	static let users = URL(string: "https://randomUser.me/api?seed=CoinStats")!
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -104,11 +103,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actionImageView" destination="UR9-d8-5Tb" id="OKL-g5-khJ"/>
                 <outlet property="addressLabel" destination="MXf-Ab-Fo4" id="NrD-sp-WvD"/>
                 <outlet property="avatarImageView" destination="ZEc-3v-qkd" id="jYk-k7-ZOL"/>
                 <outlet property="emailLabel" destination="YZW-Cl-Saj" id="9B4-a8-fE7"/>
                 <outlet property="genderImageView" destination="Cls-ed-6br" id="8eD-gZ-IYR"/>
-                <outlet property="heartImageView" destination="UR9-d8-5Tb" id="OKL-g5-khJ"/>
                 <outlet property="nameLabel" destination="oU8-xN-VjH" id="JJ9-yP-S7Q"/>
                 <outlet property="phoneLabel" destination="ksi-uF-KKk" id="2Zk-kM-f2M"/>
             </connections>

@@ -59,28 +59,23 @@ final class RemoteUsersViewController: BaseViewController {
 	// MARK: - Reactive
 
 	private func doBindings() {
-		// MARK: - SearchBar
-
+		// SearchBar
 		navigationItem.searchController?.searchBar.rx.text.orEmpty
 			.bind(to: viewModel.search)
 			.disposed(by: disposeBag)
 
-		// MARK: - TableView
+		// TableView
+		viewModel.users
+			.bind(to: tableView.rx.items) { [viewModel] tv, row, model in
+				let indexPath = IndexPath(row: row, section: 0)
+				let cell: UserTableViewCell = tv.dequeueReusableCell(for: indexPath)
+				cell.model = model
+				cell.delegate = viewModel
+				return cell
+			}
+			.disposed(by: disposeBag)
 
-		Observable.combineLatest(viewModel.users, viewModel.search) { users, search in
-			zip(users, [String](repeating: search, count: users.count))
-		}
-		.bind(to: tableView.rx.items) { [viewModel] tv, row, tuple in
-			let indexPath = IndexPath(row: row, section: 0)
-			let cell: UserTableViewCell = tv.dequeueReusableCell(for: indexPath)
-			let (user, search) = tuple
-			cell.user = user
-			cell.delegate = viewModel
-			cell.search = search
-			return cell
-		}
-		.disposed(by: disposeBag)
-
+		// LoadMore
 		tableView.rx.contentOffset
 			.flatMap { [weak self] _ -> Observable<Void> in
 				guard let self = self else { return .empty() }
@@ -89,8 +84,7 @@ final class RemoteUsersViewController: BaseViewController {
 			.bind(to: viewModel.loadMore)
 			.disposed(by: disposeBag)
 
-		// MARK: - Error
-
+		// Error
 		viewModel.error.bind(to: error).disposed(by: disposeBag)
 	}
 }

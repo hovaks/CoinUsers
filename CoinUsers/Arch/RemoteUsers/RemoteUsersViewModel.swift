@@ -19,20 +19,27 @@ final class RemoteUsersViewModel: BaseViewModel {
 
 	// MARK: - Outputs
 
-	let users = PublishRelay<[User]>()
+	let users = PublishRelay<[UserTableViewCell.Model]>()
 
 	// MARK: - Services
 
 	private let usersService: RemoteUsersServiceProtocol
+	private let realmService: RealmServiceProtocol
 
 	// MARK: - Internals
 
 	private let isLoading = BehaviorRelay(value: false)
 	private let allUsers = BehaviorRelay(value: [User]())
 	private let filteredUsers = PublishRelay<[User]>()
+	private let localUsers = PublishRelay<[User]>()
+	private let save = PublishRelay<User>()
+	private let delete = PublishRelay<User>()
 
-	init(usersService: RemoteUsersServiceProtocol) {
+	// MARK: - Init
+
+	init(usersService: RemoteUsersServiceProtocol, realmService: RealmServiceProtocol) {
 		self.usersService = usersService
+		self.realmService = realmService
 		super.init()
 
 		doBindings()
@@ -41,8 +48,14 @@ final class RemoteUsersViewModel: BaseViewModel {
 	// MARK: - Reactive
 
 	private func doBindings() {
-		// MARK: - API
+		bindAPI()
+		bindRealm()
+		bindUsers()
+	}
 
+	// MARK: API
+
+	private func bindAPI() {
 		let resultsPerPage = 50
 		Observable.merge(refresh.asObservable(), loadMore.asObservable())
 			.withLatestFrom(isLoading).filter { !$0 }
@@ -58,7 +71,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 			.bind(to: allUsers)
 			.disposed(by: disposeBag)
 
-		// MARK: - Search
+		// Search
 
 		search
 			.withLatestFrom(allUsers) { query, users in
@@ -66,24 +79,68 @@ final class RemoteUsersViewModel: BaseViewModel {
 			}
 			.bind(to: filteredUsers)
 			.disposed(by: disposeBag)
+	}
 
-		// MARK: - Users
+	// MARK: Users
 
+	private func bindUsers() {
 		Observable.combineLatest(
-			allUsers.asObservable(),
-			filteredUsers.asObservable()
-		) { all, filtered in
-			filtered.isEmpty ? all : filtered
+			allUsers,
+			filteredUsers,
+			localUsers,
+			search
+		) { all, filtered, localUsers, search in
+			let remoteUsers = filtered.isEmpty ? all : filtered
+			return remoteUsers.map { remoteUser in
+				.init(
+					user: remoteUser,
+					isSaved: localUsers.contains(where: { $0.id == remoteUser.id }),
+					search: search
+				)
+			}
 		}
 		.bind(to: users)
 		.disposed(by: disposeBag)
+	}
+
+	// MARK: Realm
+
+	private func bindRealm() {
+		refresh
+			.flatMap { [realmService] in
+				realmService.read()
+			}
+			.bind(to: localUsers)
+			.disposed(by: disposeBag)
+
+		// Save
+		save
+			.flatMap { [realmService] user in
+				realmService.save(user: user)
+			}
+			.flatMap { [realmService] _ in
+				realmService.read()
+			}
+			.bind(to: localUsers)
+			.disposed(by: disposeBag)
+
+		// Delete
+		delete
+			.flatMap { [realmService] user in
+				realmService.delete(user: user)
+			}
+			.flatMap { [realmService] _ in
+				realmService.read()
+			}
+			.bind(to: localUsers)
+			.disposed(by: disposeBag)
 	}
 }
 
 // MARK: UserCellDelegate
 
 extension RemoteUsersViewModel: UserCellDelegate {
-	func didTapSaveButton(user: User) {
-		print(user)
+	func didTapActionButton(for model: UserTableViewCell.Model) {
+		model.isSaved ? delete.accept(model.user) : save.accept(model.user)
 	}
 }
