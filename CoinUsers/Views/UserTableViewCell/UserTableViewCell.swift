@@ -64,13 +64,13 @@ final class UserTableViewCell: UITableViewCell, NibReusable {
 
 	private func configure(with model: Model) {
 		let user = model.user
-		avatarImageView.kf.setImage(with: user.avatar, placeholder: UIImage(systemName: "person.crop.circle"))
+		avatarImageView.kf.setImage(with: user.avatar, placeholder: UIImage.person)
 		nameLabel.text = user.fullName
 		genderImageView.image = UIImage(named: user.genderSign)
 		emailLabel.text = user.email
 		phoneLabel.text = user.phone
 		addressLabel.text = user.addressText
-		actionImageView.image = model.isSaved ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+		actionImageView.image = model.isSaved ? .heartFill : .heart
 
 		highlightSearch(for: model.search)
 

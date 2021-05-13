@@ -16,6 +16,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 	let refresh = PublishRelay<Void>()
 	let loadMore = PublishRelay<Void>()
 	let search = BehaviorRelay(value: "")
+	let openUserDetails = PublishRelay<UserDetailsViewModel.Context>()
 
 	// MARK: - Outputs
 
@@ -51,6 +52,7 @@ final class RemoteUsersViewModel: BaseViewModel {
 		bindAPI()
 		bindRealm()
 		bindUsers()
+		bindStepper()
 	}
 
 	// MARK: API
@@ -133,6 +135,13 @@ final class RemoteUsersViewModel: BaseViewModel {
 				realmService.read()
 			}
 			.bind(to: localUsers)
+			.disposed(by: disposeBag)
+	}
+
+	private func bindStepper() {
+		openUserDetails
+			.map(RemoteUsersStep.details(context:))
+			.bind(to: steps)
 			.disposed(by: disposeBag)
 	}
 }

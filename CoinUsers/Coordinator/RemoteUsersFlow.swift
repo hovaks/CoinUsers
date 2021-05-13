@@ -17,6 +17,8 @@ final class RemoteUsersFlow: NavigationFlow {
 		switch step {
 		case .root:
 			return push(to: RemoteUsersViewController.self)
+		case .details(let user):
+			return push(to: UserDetailsViewController.self, with: user)
 		}
 	}
 }

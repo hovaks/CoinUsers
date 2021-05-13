@@ -10,6 +10,8 @@ import UIKit
 import RxFlow
 import RxSwift
 
+// MARK: - LocalUsersViewController
+
 final class LocalUsersViewController: BaseViewController {
 	// MARK: - MVVM
 
@@ -26,6 +28,7 @@ final class LocalUsersViewController: BaseViewController {
 		tableView.separatorInset = .zero
 		tableView.tableFooterView = UIView()
 		tableView.register(cellType: UserTableViewCell.self)
+		tableView.rx.setDelegate(self).disposed(by: disposeBag)
 	}
 
 	// MARK: - Lifecycle
@@ -40,13 +43,19 @@ final class LocalUsersViewController: BaseViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
+		navigationItem.searchController?.isActive = false
 		viewModel.refresh.accept(())
 	}
 
 	// MARK: - Search
 
+	private var searchBar: UISearchBar? {
+		navigationItem.searchController?.searchBar
+	}
+
 	private func configureSearchController() {
 		let searchController = UISearchController(searchResultsController: nil)
+		searchController.searchBar.barTintColor = .main1
 		searchController.searchBar.placeholder = "Search by name, email, phone, location"
 		searchController.automaticallyShowsCancelButton = false
 		searchController.obscuresBackgroundDuringPresentation = false
@@ -56,9 +65,10 @@ final class LocalUsersViewController: BaseViewController {
 	}
 
 	// MARK: - Reactive
+
 	private func doBindings() {
 		// SearchBar
-		navigationItem.searchController?.searchBar.rx.text.orEmpty
+		searchBar?.rx.text.orEmpty
 			.bind(to: viewModel.search)
 			.disposed(by: disposeBag)
 
@@ -73,7 +83,29 @@ final class LocalUsersViewController: BaseViewController {
 			}
 			.disposed(by: disposeBag)
 
+		Observable.zip(
+			tableView.rx.modelSelected(UserTableViewCell.Model.self),
+			tableView.rx.itemSelected
+		)
+		.do(onNext: { [weak self] _, indexPath in
+			self?.searchBar?.endEditing(true)
+			self?.tableView?.deselectRow(at: indexPath, animated: true)
+		})
+		.map { UserDetailsViewModel.Context(user: $0.0.user, isSaved: true) }
+		.bind(to: viewModel.openUserDetails)
+		.disposed(by: disposeBag)
+
 		// Error
 		viewModel.error.bind(to: error).disposed(by: disposeBag)
+	}
+}
+
+// MARK: UIScrollViewDelegate
+
+extension LocalUsersViewController: UIScrollViewDelegate {
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		DispatchQueue.main.async { [weak self] in
+			self?.navigationItem.searchController?.isActive = false
+		}
 	}
 }

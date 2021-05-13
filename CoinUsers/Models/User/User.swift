@@ -13,7 +13,7 @@ protocol User {
 	var title: String { get }
 	var firstName: String { get }
 	var lastName: String { get }
-	var genderSign: String { get }
+	var genderText: String { get }
 	var age: Int { get }
 	var email: String { get }
 	var phone: String { get }
@@ -24,4 +24,5 @@ extension User {
 	var fullName: String { firstName + " " + lastName }
 	var addressText: String { address.country + ", " + address.state + ", " + address.city }
 	var searchFields: [String] { [fullName, email, phone, addressText] }
+	var genderSign: String { genderText == "male" ? "mars" : "venus" }
 }

@@ -52,13 +52,7 @@ struct RemoteUser: Decodable {
 // MARK: User
 
 extension RemoteUser: User {
-	var genderSign: String {
-		switch gender {
-		case .male: return "mars"
-		case .female: return "venus"
-		}
-	}
-
+	var genderText: String { gender.rawValue }
 	var id: String { login.uuid }
 	var avatar: URL? { picture.large }
 	var title: String { name.title }

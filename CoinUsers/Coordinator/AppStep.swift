@@ -17,12 +17,14 @@ enum AppStep: Step {
 
 enum RemoteUsersStep: Step {
 	case root
+	case details(context: UserDetailsViewModel.Context)
 }
 
 // MARK: - LocalUsersStep
 
 enum LocalUsersStep: Step {
 	case root
+	case details(context: UserDetailsViewModel.Context)
 }
 
 // MARK: - SettingsStep

@@ -29,5 +29,19 @@ final class UsersAssembly: Assembly {
 			controller.viewModel = r ~> LocalUsersViewModel.self
 			return controller
 		}
+
+		// MARK: - Details
+
+		container.autoregister(
+			UserDetailsViewModel.self,
+			argument: UserDetailsViewModel.Context.self,
+			initializer: UserDetailsViewModel.init
+		)
+
+		container.register(UserDetailsViewController.self) { (r, context: UserDetailsViewModel.Context) in
+			let controller = UserDetailsViewController.instantiate()
+			controller.viewModel = r ~> (UserDetailsViewModel.self, argument: context)
+			return controller
+		}
 	}
 }

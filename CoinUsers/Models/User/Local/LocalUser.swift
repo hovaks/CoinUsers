@@ -16,7 +16,7 @@ final class LocalUser: Object {
 	@objc dynamic var _title: String!
 	@objc dynamic var _firstName: String!
 	@objc dynamic var _lastName: String!
-	@objc dynamic var _genderSign: String!
+	@objc dynamic var _gender: String!
 	@objc dynamic var _age = -1
 	@objc dynamic var _email: String!
 	@objc dynamic var _phone: String!
@@ -30,7 +30,7 @@ final class LocalUser: Object {
 		_title = user.title
 		_firstName = user.firstName
 		_lastName = user.lastName
-		_genderSign = user.genderSign
+		_gender = user.genderText
 		_age = user.age
 		_email = user.email
 		_phone = user.phone
@@ -46,7 +46,7 @@ extension LocalUser: User {
 	var title: String { _title }
 	var firstName: String { _firstName }
 	var lastName: String { _lastName }
-	var genderSign: String { _genderSign }
+	var genderText: String { _gender }
 	var age: Int { _age }
 	var email: String { _email }
 	var phone: String { _phone }

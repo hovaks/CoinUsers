@@ -11,6 +11,8 @@ import UIKit
 import RxFlow
 import RxSwift
 
+// MARK: - RemoteUsersViewController
+
 final class RemoteUsersViewController: BaseViewController {
 	// MARK: - MVVM
 
@@ -27,6 +29,7 @@ final class RemoteUsersViewController: BaseViewController {
 		tableView.separatorInset = .zero
 		tableView.tableFooterView = UIView()
 		tableView.register(cellType: UserTableViewCell.self)
+		tableView.rx.setDelegate(self).disposed(by: disposeBag)
 	}
 
 	// MARK: - Lifecycle
@@ -41,13 +44,19 @@ final class RemoteUsersViewController: BaseViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
+		navigationItem.searchController?.isActive = false
 		viewModel.refresh.accept(())
 	}
 
 	// MARK: - Search
 
+	private var searchBar: UISearchBar? {
+		navigationItem.searchController?.searchBar
+	}
+
 	private func configureSearchController() {
 		let searchController = UISearchController(searchResultsController: nil)
+		searchController.searchBar.barTintColor = .main1
 		searchController.searchBar.placeholder = "Search by name, email, phone, location"
 		searchController.automaticallyShowsCancelButton = false
 		searchController.obscuresBackgroundDuringPresentation = false
@@ -60,7 +69,7 @@ final class RemoteUsersViewController: BaseViewController {
 
 	private func doBindings() {
 		// SearchBar
-		navigationItem.searchController?.searchBar.rx.text.orEmpty
+		searchBar?.rx.text.orEmpty
 			.bind(to: viewModel.search)
 			.disposed(by: disposeBag)
 
@@ -75,6 +84,18 @@ final class RemoteUsersViewController: BaseViewController {
 			}
 			.disposed(by: disposeBag)
 
+		Observable.zip(
+			tableView.rx.modelSelected(UserTableViewCell.Model.self),
+			tableView.rx.itemSelected
+		)
+		.do(onNext: { [weak self] _, indexPath in
+			self?.searchBar?.endEditing(true)
+			self?.tableView?.deselectRow(at: indexPath, animated: true)
+		})
+		.map { UserDetailsViewModel.Context(user: $0.0.user, isSaved: $0.0.isSaved) }
+		.bind(to: viewModel.openUserDetails)
+		.disposed(by: disposeBag)
+
 		// LoadMore
 		tableView.rx.contentOffset
 			.flatMap { [weak self] _ -> Observable<Void> in
@@ -86,5 +107,13 @@ final class RemoteUsersViewController: BaseViewController {
 
 		// Error
 		viewModel.error.bind(to: error).disposed(by: disposeBag)
+	}
+}
+
+extension RemoteUsersViewController: UIScrollViewDelegate {
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		DispatchQueue.main.async { [weak self] in
+			self?.navigationItem.searchController?.isActive = false
+		}
 	}
 }

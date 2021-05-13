@@ -17,6 +17,8 @@ final class LocalUsersFlow: NavigationFlow {
 		switch step {
 		case .root:
 			return push(to: LocalUsersViewController.self)
+		case .details(let user):
+			return push(to: UserDetailsViewController.self, with: user)
 		}
 	}
 }

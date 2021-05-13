@@ -21,7 +21,15 @@ class BaseViewController: UIViewController, StoryboardBased {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		setupNavigationBar()
 		doBindings()
+	}
+
+	private func setupNavigationBar() {
+		let backItem = UIBarButtonItem()
+		backItem.title = nil
+		navigationItem.backBarButtonItem = backItem
+		navigationController?.navigationBar.tintColor = .main1
 	}
 
 	// MARK: - Reactive

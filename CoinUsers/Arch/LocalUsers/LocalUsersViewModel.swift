@@ -8,11 +8,14 @@
 import RxRelay
 import RxSwift
 
+// MARK: - LocalUsersViewModel
+
 final class LocalUsersViewModel: BaseViewModel {
 	// MARK: - Inputs
 
 	let refresh = PublishRelay<Void>()
 	let search = BehaviorRelay(value: "")
+	let openUserDetails = PublishRelay<UserDetailsViewModel.Context>()
 
 	// MARK: - Outputs
 
@@ -40,6 +43,12 @@ final class LocalUsersViewModel: BaseViewModel {
 	// MARK: - Reactive
 
 	private func doBindings() {
+		bindRealm()
+		bindStepper()
+	}
+
+	// MARK: Realm
+	private func bindRealm() {
 		// Read
 		refresh
 			.flatMap { [realmService] in
@@ -73,6 +82,14 @@ final class LocalUsersViewModel: BaseViewModel {
 				realmService.read()
 			}
 			.bind(to: allUsers)
+			.disposed(by: disposeBag)
+	}
+
+	// MARK: Stepper
+	private func bindStepper() {
+		openUserDetails
+			.map(LocalUsersStep.details(context:))
+			.bind(to: steps)
 			.disposed(by: disposeBag)
 	}
 }
