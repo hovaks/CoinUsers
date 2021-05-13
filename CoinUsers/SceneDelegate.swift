@@ -7,16 +7,30 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+import RxFlow
+import RxSwift
 
+import Swinject
+import SwinjectAutoregistration
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+	let disposeBag = DisposeBag()
+	let coordinator = FlowCoordinator()
+	private var parentAssembler = Assembler([FlowAssembly(), ServiceAssembly()])
 	var window: UIWindow?
 
-
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-		guard let _ = (scene as? UIWindowScene) else { return }
+		guard let windowScene = (scene as? UIWindowScene) else { return }
+		window = UIWindow(windowScene: windowScene)
+		guard let window = window else { return }
+
+		let appFlow = parentAssembler.resolver ~> (AppFlow.self, argument: parentAssembler)
+		coordinator.coordinate(flow: appFlow, with: AppStepper())
+
+		Flows.use(appFlow, when: .created) { root in
+			window.rootViewController = root
+			window.makeKeyAndVisible()
+		}
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {
@@ -46,7 +60,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Use this method to save data, release shared resources, and store enough scene-specific state information
 		// to restore the scene back to its current state.
 	}
-
-
 }
-

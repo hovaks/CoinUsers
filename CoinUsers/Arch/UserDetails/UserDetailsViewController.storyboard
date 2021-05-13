@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Details View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="UserDetailsViewController" customModule="CoinUsers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUW-P7-eSv">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Zoj-KB-j89">
+                                        <rect key="frame" x="0.0" y="16" width="414" height="645"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8BH-Yo-OVp">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LdH-9b-FFg">
+                                                        <rect key="frame" x="157" y="0.0" width="100" height="100"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="LdH-9b-FFg" secondAttribute="height" id="L5x-CU-P8s"/>
+                                                            <constraint firstAttribute="width" constant="100" id="ua3-rf-fiG"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZLs-sW-eDY">
+                                                <rect key="frame" x="0.0" y="116" width="414" height="237"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="W92-ZI-aPS" customClass="UserDetailRowView" customModule="CoinUsers" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="41"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Age"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="VLq-Hv-tcz" customClass="UserDetailRowView" customModule="CoinUsers" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="49" width="382" height="41"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Gender"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="iLb-6M-0uO" customClass="UserDetailRowView" customModule="CoinUsers" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="98" width="382" height="41"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Email"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="0p7-f4-lVZ" customClass="UserDetailRowView" customModule="CoinUsers" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="147" width="382" height="41"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Phone number"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="cg8-GQ-Olf" customClass="UserDetailRowView" customModule="CoinUsers" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="196" width="382" height="41"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Address"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="16" bottom="0.0" trailing="16"/>
+                                            </stackView>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tCp-e4-OpT">
+                                                <rect key="frame" x="0.0" y="369" width="414" height="276"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="tCp-e4-OpT" secondAttribute="height" multiplier="3:2" id="Ba3-Gb-QwH"/>
+                                                </constraints>
+                                            </mapView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Zoj-KB-j89" firstAttribute="bottom" secondItem="0RV-Pj-TeG" secondAttribute="bottom" id="3QN-sN-rDd"/>
+                                    <constraint firstItem="Zoj-KB-j89" firstAttribute="top" secondItem="0RV-Pj-TeG" secondAttribute="top" constant="16" id="EKF-cr-rcN"/>
+                                    <constraint firstItem="Zoj-KB-j89" firstAttribute="leading" secondItem="0RV-Pj-TeG" secondAttribute="leading" id="L8F-Mv-6r4"/>
+                                    <constraint firstItem="Zoj-KB-j89" firstAttribute="width" secondItem="dWR-za-oZx" secondAttribute="width" id="Lx0-jQ-8JP"/>
+                                    <constraint firstItem="Zoj-KB-j89" firstAttribute="trailing" secondItem="0RV-Pj-TeG" secondAttribute="trailing" id="RED-6V-HsU"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="0RV-Pj-TeG"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="dWR-za-oZx"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OUW-P7-eSv" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Swr-eT-Kue"/>
+                            <constraint firstAttribute="trailing" secondItem="OUW-P7-eSv" secondAttribute="trailing" id="k1h-pe-ryO"/>
+                            <constraint firstAttribute="bottom" secondItem="OUW-P7-eSv" secondAttribute="bottom" id="lHh-w7-lqT"/>
+                            <constraint firstItem="OUW-P7-eSv" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="zbB-ER-sji"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressRow" destination="cg8-GQ-Olf" id="OuJ-sD-vgB"/>
+                        <outlet property="ageRow" destination="W92-ZI-aPS" id="9Ma-fF-OfT"/>
+                        <outlet property="avatarImageView" destination="LdH-9b-FFg" id="iX4-7G-9Yj"/>
+                        <outlet property="emailRow" destination="iLb-6M-0uO" id="7or-2o-7wQ"/>
+                        <outlet property="genderRow" destination="VLq-Hv-tcz" id="v9w-Nw-Sza"/>
+                        <outlet property="mapView" destination="tCp-e4-OpT" id="hnn-BO-Ggb"/>
+                        <outlet property="phoneRow" destination="0p7-f4-lVZ" id="E99-Ro-nwY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="89"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
